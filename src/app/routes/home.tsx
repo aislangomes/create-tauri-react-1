@@ -1,25 +1,20 @@
-import env from '@/config/env'
-import BuiltWith from '@/features/built-with'
-import GithubStarButton from '@/features/github-star-button'
+import { TableAlunos } from '@/components/tableAlunos'
 
 export function HomePage() {
     return (
-        <div className="flex h-screen">
-            <div className="m-auto text-center space-y-3">
-                <div className="space-y-3">
-                    <BuiltWith />
-                    <h1 className="text-3xl items-center">
-                        Welcome to Tauri React template!
-                    </h1>
-                    <p>
-                        This template is a starting point for building Tauri
-                        apps with Vite, React, and Tailwind CSS.
-                    </p>
-                    <p>Env variable: {env.API_URL}</p>
-                </div>
-                <GithubStarButton />
-            </div>
-        </div>
+        <>
+            {/* <header className='bg-blue-500 p-4 flex items-center gap-1 absolute w-full'>
+                <h1 className='text-3xl mr-auto'>Gerenciador de listas</h1>
+                <button className='bg-amber-300 p-2 rounded-2xl'>Listas de alunos</button>
+                <button className='bg-amber-300 p-2 rounded-2xl'>Cadastrar</button>
+            </header>
+            <main className='grid grid-flow-col gap-5 h-screen p-2.5 mt-7'>
+                <div className='bg-red-500 row-span-3 col-span-3'>01</div>
+                <div className='bg-red-700 row-span-2'>02</div>
+                <div className='bg-red-200'>03</div>
+            </main> */}
+            <TableAlunos />
+        </>
     )
 }
 
