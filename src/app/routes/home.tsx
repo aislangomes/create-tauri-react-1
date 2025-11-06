@@ -1,4 +1,6 @@
-import { TableAlunos } from '@/components/tableAlunos'
+import { columns } from '@/components/alunos/columns'
+import { DataTable } from '@/components/alunos/data-table'
+import StudentsPage from '@/components/alunos/page'
 
 export function HomePage() {
     return (
@@ -13,7 +15,7 @@ export function HomePage() {
                 <div className='bg-red-700 row-span-2'>02</div>
                 <div className='bg-red-200'>03</div>
             </main> */}
-            <TableAlunos />
+            <StudentsPage />
         </>
     )
 }
