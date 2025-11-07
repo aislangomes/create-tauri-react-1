@@ -13,71 +13,76 @@ import {
     CardHeader,
     CardTitle
 } from '../ui/card'
-import { Car, ChevronDownIcon } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Calendar22 } from '../date-picker'
 import {
     Select,
     SelectContent,
-    SelectGroup,
     SelectItem,
     SelectTrigger,
     SelectValue
 } from '../ui/select'
 
-const studentSchema = z.object({
-    id: z.number(),
-    fullname: z
-        .string()
-        .min(3, { message: 'O nome deve ter no mínimo 3 caracteres.' }),
-    email: z.email({ message: 'Insira um e-mail válido.' }).optional(),
-    sex: z.enum(['Masculino', 'Feminino']),
-    class: z.enum([
-        'Segunda-Feira',
-        'Terça-Feira',
-        'Quarta-Feira',
-        'Quinta-Feira',
-        'Sexta-Feira'
-    ]),
-    shift: z.enum(['Manhã', 'Tarde']),
-    module: z.enum(['Básico', 'Especifico']),
-    workload: z
-        .number()
-        .min(1, { message: 'A carga horária deve ser no mínimo 1 hora.' }),
-    gurdiansContact: z.string().optional(),
-    gurdianName: z.string().optional(),
-    enrollmentInitialDate: z.date(),
-    enrollmentEndDate: z.date(),
-    birthDate: z.date(),
-    phone: z
-        .string()
-        .min(10, { message: 'O telefone deve ter no mínimo 10 caracteres.' }),
-    arch: z.enum(['Administrativo', 'Tecnologia']),
-    instructor: z.enum(['instrutor1', 'intrutor2']),
-    employer: z.enum(['empresa1', 'empresa2'])
-})
+const studentSchema = z
+    .object({
+        id: z.number(),
+        fullname: z
+            .string()
+            .min(3, { message: 'O nome deve ter no mínimo 3 caracteres.' }),
+        email: z.email({ message: 'Insira um e-mail válido.' }).optional(),
+        sex: z.enum(['Masculino', 'Feminino']),
+        class: z.enum([
+            'Segunda-Feira',
+            'Terça-Feira',
+            'Quarta-Feira',
+            'Quinta-Feira',
+            'Sexta-Feira'
+        ]),
+        shift: z.enum(['Manhã', 'Tarde']),
+        module: z.enum(['Básico', 'Especifico']),
+        workload: z.coerce.number().min(1),
+        gurdiansContact: z.string().optional(),
+        gurdianName: z.string().optional(),
+        enrollmentInitialDate: z.date().optional(),
+        enrollmentEndDate: z.date().optional(),
+        birthDate: z.date().optional(),
+        phone: z
+            .string()
+            .min(10, {
+                message: 'O telefone deve ter no mínimo 10 caracteres.'
+            }),
+        arch: z.enum(['Administrativo', 'Tecnologia']),
+        instructor: z.enum(['instrutor1', 'intrutor2']),
+        employer: z.enum(['empresa1', 'empresa2'])
+    })
+    .refine(
+        (data) =>
+            !data.enrollmentInitialDate ||
+            !data.enrollmentEndDate ||
+            data.enrollmentInitialDate <= data.enrollmentEndDate
+    )
 
 export function StudentForm() {
     const form = useForm<z.infer<typeof studentSchema>>({
         resolver: zodResolver(studentSchema),
         defaultValues: {
-            id: undefined,
+            id: 0,
             email: '',
             fullname: '',
             phone: '',
             birthDate: undefined,
-            sex: undefined,
+            sex: 'Feminino',
             gurdiansContact: '',
             gurdianName: '',
-            employer: undefined,
+            employer: 'empresa1',
             enrollmentEndDate: undefined,
             enrollmentInitialDate: undefined,
             workload: 0,
-            instructor: undefined,
-            arch: undefined,
-            module: undefined,
-            shift: undefined,
-            class: undefined
+            instructor: 'instrutor1',
+            arch: 'Administrativo',
+            module: 'Básico',
+            shift: 'Manhã',
+            class: 'Quarta-Feira'
         }
     })
 
@@ -179,7 +184,12 @@ export function StudentForm() {
                                         <FormItem className="basis-full">
                                             <FormLabel>Sexo</FormLabel>
                                             <FormControl>
-                                                <Select {...field}>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    {...field}
+                                                >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Sexo" />
                                                     </SelectTrigger>
@@ -246,7 +256,10 @@ export function StudentForm() {
                                     <FormItem className="basis-full">
                                         <FormLabel>Empresa</FormLabel>
                                         <FormControl>
-                                            <Select {...field}>
+                                            <Select
+                                                onValueChange={field.onChange}
+                                                {...field}
+                                            >
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Empresa" />
                                                 </SelectTrigger>
@@ -329,7 +342,12 @@ export function StudentForm() {
                                         <FormItem className="basis-full">
                                             <FormLabel>Instrutor</FormLabel>
                                             <FormControl>
-                                                <Select {...field}>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    {...field}
+                                                >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Instrutor" />
                                                     </SelectTrigger>
@@ -359,7 +377,12 @@ export function StudentForm() {
                                         <FormItem className="basis-full">
                                             <FormLabel>Arco</FormLabel>
                                             <FormControl>
-                                                <Select {...field}>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    {...field}
+                                                >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Arco" />
                                                     </SelectTrigger>
@@ -389,7 +412,12 @@ export function StudentForm() {
                                         <FormItem className="basis-full">
                                             <FormLabel>Módulo</FormLabel>
                                             <FormControl>
-                                                <Select {...field}>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    {...field}
+                                                >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Módulo" />
                                                     </SelectTrigger>
@@ -421,7 +449,12 @@ export function StudentForm() {
                                         <FormItem className="basis-full">
                                             <FormLabel>Turma</FormLabel>
                                             <FormControl>
-                                                <Select {...field}>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    {...field}
+                                                >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Turma" />
                                                     </SelectTrigger>
@@ -451,7 +484,12 @@ export function StudentForm() {
                                         <FormItem className="basis-full">
                                             <FormLabel>Turno</FormLabel>
                                             <FormControl>
-                                                <Select {...field}>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    {...field}
+                                                >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Turno" />
                                                     </SelectTrigger>

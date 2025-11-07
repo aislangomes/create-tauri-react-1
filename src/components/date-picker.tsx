@@ -5,7 +5,6 @@ import { ChevronDownIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
-import { Label } from '@/components/ui/label'
 import {
     Popover,
     PopoverContent,
@@ -14,11 +13,17 @@ import {
 
 type CalendarProps = {
     value?: Date
-    onChange?: (date?: Date) => void
+    onChange?: (date: Date) => void
 }
 
 export function Calendar22({ value, onChange }: CalendarProps) {
     const [open, setOpen] = React.useState(false)
+
+    const handleSelect = (date: Date | undefined) => {
+        // chama onChange com o mesmo tipo (Date | undefined)
+        onChange?.(date)
+        setOpen(false)
+    }
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -40,10 +45,7 @@ export function Calendar22({ value, onChange }: CalendarProps) {
                     mode="single"
                     selected={value}
                     captionLayout="dropdown"
-                    onSelect={(date) => {
-                        onChange?.(date)
-                        setOpen(false)
-                    }}
+                    onSelect={handleSelect}
                 />
             </PopoverContent>
         </Popover>
