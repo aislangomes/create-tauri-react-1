@@ -20,7 +20,6 @@ export function Calendar22({ value, onChange }: CalendarProps) {
     const [open, setOpen] = React.useState(false)
 
     const handleSelect = (date: Date | undefined) => {
-        // chama onChange com o mesmo tipo (Date | undefined)
         onChange?.(date)
         setOpen(false)
     }
@@ -46,6 +45,7 @@ export function Calendar22({ value, onChange }: CalendarProps) {
                     selected={value}
                     captionLayout="dropdown"
                     onSelect={handleSelect}
+                    endMonth={new Date(2050, 11)}
                 />
             </PopoverContent>
         </Popover>

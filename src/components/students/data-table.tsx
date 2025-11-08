@@ -25,7 +25,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue
 } from '../ui/select'
@@ -78,7 +77,7 @@ export function DataTable<TData, TValue>({
                     className="max-w-sm ml-4"
                 />
                 <Select
-                    onValueChange={(value) =>
+                    onValueChange={(value: string) =>
                         table.getColumn('shift')?.setFilterValue(value)
                     }
                 >

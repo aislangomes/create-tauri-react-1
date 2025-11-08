@@ -30,17 +30,18 @@ const studentSchema = z
             .string()
             .min(3, { message: 'O nome deve ter no mínimo 3 caracteres.' }),
         email: z.email({ message: 'Insira um e-mail válido.' }).optional(),
-        sex: z.enum(['Masculino', 'Feminino']),
+        sex: z.enum(['', 'Masculino', 'Feminino']),
         class: z.enum([
+            '',
             'Segunda-Feira',
             'Terça-Feira',
             'Quarta-Feira',
             'Quinta-Feira',
             'Sexta-Feira'
         ]),
-        shift: z.enum(['Manhã', 'Tarde']),
-        module: z.enum(['Básico', 'Especifico']),
-        workload: z.coerce.number().min(1),
+        shift: z.enum(['', 'Manhã', 'Tarde']),
+        module: z.enum(['', 'Básico', 'Especifico']),
+        workload: z.string(),
         gurdiansContact: z.string().optional(),
         gurdianName: z.string().optional(),
         enrollmentInitialDate: z.date().optional(),
@@ -51,9 +52,9 @@ const studentSchema = z
             .min(10, {
                 message: 'O telefone deve ter no mínimo 10 caracteres.'
             }),
-        arch: z.enum(['Administrativo', 'Tecnologia']),
-        instructor: z.enum(['instrutor1', 'intrutor2']),
-        employer: z.enum(['empresa1', 'empresa2'])
+        arch: z.enum(['', 'Administrativo', 'Tecnologia']),
+        instructor: z.enum(['', 'instrutor1', 'intrutor2']),
+        employer: z.enum(['', 'empresa1', 'empresa2'])
     })
     .refine(
         (data) =>
@@ -71,22 +72,24 @@ export function StudentForm() {
             fullname: '',
             phone: '',
             birthDate: undefined,
-            sex: 'Feminino',
+            sex: '',
             gurdiansContact: '',
             gurdianName: '',
-            employer: 'empresa1',
+            employer: '',
             enrollmentEndDate: undefined,
             enrollmentInitialDate: undefined,
-            workload: 0,
-            instructor: 'instrutor1',
-            arch: 'Administrativo',
-            module: 'Básico',
-            shift: 'Manhã',
-            class: 'Quarta-Feira'
+            workload: '',
+            instructor: '',
+            arch: '',
+            module: '',
+            shift: '',
+            class: ''
         }
     })
 
     async function onSubmit(data: z.infer<typeof studentSchema>) {
+        data.id = Math.floor(Math.random() * 100000 - 0) + 0
+
         try {
             console.log('Form Data:', data)
             toast.success('Aluno cadastrado com sucesso!')
@@ -194,8 +197,9 @@ export function StudentForm() {
                                                         <SelectValue placeholder="Sexo" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {studentSchema.shape.sex.options.map(
-                                                            (option) => (
+                                                        {studentSchema.shape.sex.options
+                                                            .slice(1)
+                                                            .map((option) => (
                                                                 <SelectItem
                                                                     key={option}
                                                                     value={
@@ -204,8 +208,7 @@ export function StudentForm() {
                                                                 >
                                                                     {option}
                                                                 </SelectItem>
-                                                            )
-                                                        )}
+                                                            ))}
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>
@@ -264,16 +267,16 @@ export function StudentForm() {
                                                     <SelectValue placeholder="Empresa" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    {studentSchema.shape.employer.options.map(
-                                                        (option) => (
+                                                    {studentSchema.shape.employer.options
+                                                        .slice(1)
+                                                        .map((option) => (
                                                             <SelectItem
                                                                 key={option}
                                                                 value={option}
                                                             >
                                                                 {option}
                                                             </SelectItem>
-                                                        )
-                                                    )}
+                                                        ))}
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
@@ -291,7 +294,6 @@ export function StudentForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    type="number"
                                                     placeholder="Carga Horária"
                                                     {...field}
                                                 />
@@ -352,8 +354,9 @@ export function StudentForm() {
                                                         <SelectValue placeholder="Instrutor" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {studentSchema.shape.instructor.options.map(
-                                                            (option) => (
+                                                        {studentSchema.shape.instructor.options
+                                                            .slice(1)
+                                                            .map((option) => (
                                                                 <SelectItem
                                                                     key={option}
                                                                     value={
@@ -362,8 +365,7 @@ export function StudentForm() {
                                                                 >
                                                                     {option}
                                                                 </SelectItem>
-                                                            )
-                                                        )}
+                                                            ))}
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>
@@ -387,8 +389,9 @@ export function StudentForm() {
                                                         <SelectValue placeholder="Arco" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {studentSchema.shape.arch.options.map(
-                                                            (option) => (
+                                                        {studentSchema.shape.arch.options
+                                                            .slice(1)
+                                                            .map((option) => (
                                                                 <SelectItem
                                                                     key={option}
                                                                     value={
@@ -397,8 +400,7 @@ export function StudentForm() {
                                                                 >
                                                                     {option}
                                                                 </SelectItem>
-                                                            )
-                                                        )}
+                                                            ))}
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>
@@ -422,8 +424,9 @@ export function StudentForm() {
                                                         <SelectValue placeholder="Módulo" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {studentSchema.shape.module.options.map(
-                                                            (option) => (
+                                                        {studentSchema.shape.module.options
+                                                            .slice(1)
+                                                            .map((option) => (
                                                                 <SelectItem
                                                                     key={option}
                                                                     value={
@@ -432,8 +435,7 @@ export function StudentForm() {
                                                                 >
                                                                     {option}
                                                                 </SelectItem>
-                                                            )
-                                                        )}
+                                                            ))}
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>
@@ -459,8 +461,9 @@ export function StudentForm() {
                                                         <SelectValue placeholder="Turma" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {studentSchema.shape.class.options.map(
-                                                            (option) => (
+                                                        {studentSchema.shape.class.options
+                                                            .slice(1)
+                                                            .map((option) => (
                                                                 <SelectItem
                                                                     key={option}
                                                                     value={
@@ -469,8 +472,7 @@ export function StudentForm() {
                                                                 >
                                                                     {option}
                                                                 </SelectItem>
-                                                            )
-                                                        )}
+                                                            ))}
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>
@@ -494,8 +496,9 @@ export function StudentForm() {
                                                         <SelectValue placeholder="Turno" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {studentSchema.shape.shift.options.map(
-                                                            (option) => (
+                                                        {studentSchema.shape.shift.options
+                                                            .slice(1)
+                                                            .map((option) => (
                                                                 <SelectItem
                                                                     key={option}
                                                                     value={
@@ -504,8 +507,7 @@ export function StudentForm() {
                                                                 >
                                                                     {option}
                                                                 </SelectItem>
-                                                            )
-                                                        )}
+                                                            ))}
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>
@@ -514,6 +516,13 @@ export function StudentForm() {
                                 />
                             </span>
                             <Button type="submit">Cadastrar</Button>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => form.reset()}
+                            >
+                                Limpar
+                            </Button>
                         </form>
                     </Form>
                 </CardContent>

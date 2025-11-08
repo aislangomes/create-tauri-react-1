@@ -1,4 +1,4 @@
-import { StudentForm } from '@/components/register/students-register'
+import { ClassThemes } from '@/components/class-themes'
 
 export function HomePage() {
     return (
@@ -13,7 +13,7 @@ export function HomePage() {
                 <div className='bg-red-700 row-span-2'>02</div>
                 <div className='bg-red-200'>03</div>
             </main> */}
-            <StudentForm />
+            <ClassThemes />
         </>
     )
 }
