@@ -62,26 +62,27 @@ export function ClassThemes() {
             </CardHeader>
             <CardContent>
                 <form id="class-themes" onSubmit={form.handleSubmit(onSubmit)}>
-                    <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => append({ theme: '' })}
-                        disabled={fields.length >= 10}
-                    >
-                        Adcionar uma nova aula
-                    </Button>
                     <FieldSet>
-                        <FieldGroup>
-                            <Field orientation="horizontal">
-                                <Calendar22 />
-                            </Field>
-                            <Field orientation="horizontal">
-                                <Checkbox id="imersion" name="imersion" />
-                                <FieldLabel htmlFor="imersion">
-                                    Imersão
-                                </FieldLabel>
-                            </Field>
+                        <FieldGroup className="flex-col gap-2.5 mb-3">
+                            <div className="flex self-center gap-4">
+                                <Field orientation="horizontal">
+                                    <Calendar22 />
+                                </Field>
+                                <Field orientation="horizontal">
+                                    <Checkbox id="imersion" name="imersion" />
+                                    <FieldLabel htmlFor="imersion">
+                                        Imersão
+                                    </FieldLabel>
+                                </Field>
+                            </div>
+                            <Button
+                                type="button"
+                                size="sm"
+                                onClick={() => append({ theme: '' })}
+                                disabled={fields.length >= 10}
+                            >
+                                Adcionar uma nova aula
+                            </Button>
                         </FieldGroup>
                     </FieldSet>
                     <FieldSet className="gap-4">

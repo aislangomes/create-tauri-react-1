@@ -28,6 +28,15 @@ import {
     SelectTrigger,
     SelectValue
 } from '../ui/select'
+import {
+    Card,
+    CardAction,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle
+} from '../ui/card'
+import { Field, FieldGroup, FieldSet } from '../ui/field'
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -60,101 +69,136 @@ export function DataTable<TData, TValue>({
     })
 
     return (
-        <div>
-            <div className="flex items-center py-4">
-                <Input
-                    placeholder="Aluno"
-                    value={
-                        (table
-                            .getColumn('student')
-                            ?.getFilterValue() as string) ?? ''
-                    }
-                    onChange={(event) =>
-                        table
-                            .getColumn('student')
-                            ?.setFilterValue(event.target.value)
-                    }
-                    className="max-w-sm ml-4"
-                />
-                <Select
-                    onValueChange={(value: string) =>
-                        table.getColumn('shift')?.setFilterValue(value)
-                    }
-                >
-                    <SelectTrigger className="min-w-44 mr-4">
-                        <SelectValue placeholder="Período" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectItem value="Manhã">Manhã</SelectItem>
-                            <SelectItem value="Tarde">Tarde</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-                <Select
-                    onValueChange={(value) =>
-                        table.getColumn('class')?.setFilterValue(value)
-                    }
-                >
-                    <SelectTrigger className="min-w-44 mr-4">
-                        <SelectValue placeholder="Turma" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectItem value="Segunda-Feira">
-                                Segunda-Feira
-                            </SelectItem>
-                            <SelectItem value="Terça-Feira">
-                                Terça-Feira
-                            </SelectItem>
-                            <SelectItem value="Quarta-Feira">
-                                Quarta-Feira
-                            </SelectItem>
-                            <SelectItem value="Quinta-Feira">
-                                Quinta-Feira
-                            </SelectItem>
-                            <SelectItem value="Sexta-Feira">
-                                Sexta-Feira
-                            </SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-                <Select
-                    onValueChange={(value) =>
-                        table.getColumn('arch')?.setFilterValue(value)
-                    }
-                >
-                    <SelectTrigger className="min-w-44 mr-4">
-                        <SelectValue placeholder="Arco" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectItem value="Administrativo">
-                                Administrativo
-                            </SelectItem>
-                            <SelectItem value="Tecnologia">
-                                Tecnologia
-                            </SelectItem>
-                            <SelectItem value="Comércio">Comércio</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-                <Input
-                    placeholder="Filtrar Empresa"
-                    value={
-                        (table
-                            .getColumn('employer')
-                            ?.getFilterValue() as string) ?? ''
-                    }
-                    onChange={(event) =>
-                        table
-                            .getColumn('employer')
-                            ?.setFilterValue(event.target.value)
-                    }
-                    className="max-w-sm ml-4"
-                />
-            </div>
-            <div className="overflow-hidden rounded-md border">
+        <Card>
+            <CardHeader>
+                <CardTitle>Lista de Alunos</CardTitle>
+                <CardAction>
+                    <FieldGroup>
+                        <Field>
+                            <Input
+                                placeholder="Aluno"
+                                value={
+                                    (table
+                                        .getColumn('student')
+                                        ?.getFilterValue() as string) ?? ''
+                                }
+                                onChange={(event) =>
+                                    table
+                                        .getColumn('student')
+                                        ?.setFilterValue(event.target.value)
+                                }
+                                className="max-w-sm ml-4"
+                            />
+                        </Field>
+                        <Field>
+                            <Select
+                                onValueChange={(value: string) =>
+                                    table
+                                        .getColumn('shift')
+                                        ?.setFilterValue(value)
+                                }
+                            >
+                                <SelectTrigger className="min-w-44 mr-4">
+                                    <SelectValue placeholder="Período" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="Manhã">
+                                            Manhã
+                                        </SelectItem>
+                                        <SelectItem value="Tarde">
+                                            Tarde
+                                        </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </Field>
+                        <Field>
+                            <Select
+                                onValueChange={(value) =>
+                                    table
+                                        .getColumn('class')
+                                        ?.setFilterValue(value)
+                                }
+                            >
+                                <SelectTrigger className="min-w-44 mr-4">
+                                    <SelectValue placeholder="Turma" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="Segunda-Feira">
+                                            Segunda-Feira
+                                        </SelectItem>
+                                        <SelectItem value="Terça-Feira">
+                                            Terça-Feira
+                                        </SelectItem>
+                                        <SelectItem value="Quarta-Feira">
+                                            Quarta-Feira
+                                        </SelectItem>
+                                        <SelectItem value="Quinta-Feira">
+                                            Quinta-Feira
+                                        </SelectItem>
+                                        <SelectItem value="Sexta-Feira">
+                                            Sexta-Feira
+                                        </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </Field>
+                        <Field>
+                            <Select
+                                onValueChange={(value) =>
+                                    table
+                                        .getColumn('arch')
+                                        ?.setFilterValue(value)
+                                }
+                            >
+                                <SelectTrigger className="min-w-44 mr-4">
+                                    <SelectValue placeholder="Arco" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="Administrativo">
+                                            Administrativo
+                                        </SelectItem>
+                                        <SelectItem value="Tecnologia">
+                                            Tecnologia
+                                        </SelectItem>
+                                        <SelectItem value="Comércio">
+                                            Comércio
+                                        </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </Field>
+                        <Field>
+                            <Input
+                                placeholder="Filtrar Empresa"
+                                value={
+                                    (table
+                                        .getColumn('employer')
+                                        ?.getFilterValue() as string) ?? ''
+                                }
+                                onChange={(event) =>
+                                    table
+                                        .getColumn('employer')
+                                        ?.setFilterValue(event.target.value)
+                                }
+                                className="max-w-sm ml-4"
+                            />
+                        </Field>
+                        <Button
+                            type="button"
+                            onClick={() => {
+                                table.getColumn('student')?.clearSorting()
+                            }}
+                        >
+                            Limpar
+                        </Button>
+                    </FieldGroup>
+                </CardAction>
+            </CardHeader>
+            <CardContent className="overflow-hidden rounded-md border">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -206,8 +250,8 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
-            </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
+            </CardContent>
+            <CardFooter className="flex items-center justify-end space-x-2 py-4">
                 <Button
                     variant="outline"
                     size="sm"
@@ -241,7 +285,7 @@ export function DataTable<TData, TValue>({
                         </SelectGroup>
                     </SelectContent>
                 </Select>
-            </div>
-        </div>
+            </CardFooter>
+        </Card>
     )
 }
