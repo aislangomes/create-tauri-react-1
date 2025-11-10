@@ -24,6 +24,7 @@ import {
     InputGroupButton,
     InputGroupInput
 } from './ui/input-group'
+import { ScrollArea } from './ui/scroll-area'
 
 const classThemesSchema = z.object({
     imersion: z.boolean(),
@@ -96,48 +97,52 @@ export function ClassThemes() {
                                         field: controllerField,
                                         fieldState
                                     }) => (
-                                        <Field
-                                            orientation="horizontal"
-                                            data-invalid={fieldState.invalid}
-                                        >
-                                            <FieldContent>
-                                                <InputGroup>
-                                                    <InputGroupInput
-                                                        {...controllerField}
-                                                        id={`class-themes-theme-${index}`}
-                                                        aria-invalid={
-                                                            fieldState.invalid
-                                                        }
-                                                        placeholder={`Aula ${index + 1}`}
-                                                        type="text"
-                                                    />
-                                                    {fields.length > 1 && (
-                                                        <InputGroupAddon align="inline-end">
-                                                            <InputGroupButton
-                                                                type="button"
-                                                                variant="ghost"
-                                                                size="icon-xs"
-                                                                onClick={() =>
-                                                                    remove(
-                                                                        index
-                                                                    )
-                                                                }
-                                                                aria-label={`Apagar aula ${index + 1}`}
-                                                            >
-                                                                <XIcon />
-                                                            </InputGroupButton>
-                                                        </InputGroupAddon>
+                                        <ScrollArea>
+                                            <Field
+                                                orientation="horizontal"
+                                                data-invalid={
+                                                    fieldState.invalid
+                                                }
+                                            >
+                                                <FieldContent>
+                                                    <InputGroup>
+                                                        <InputGroupInput
+                                                            {...controllerField}
+                                                            id={`class-themes-theme-${index}`}
+                                                            aria-invalid={
+                                                                fieldState.invalid
+                                                            }
+                                                            placeholder={`Aula ${index + 1}`}
+                                                            type="text"
+                                                        />
+                                                        {fields.length > 1 && (
+                                                            <InputGroupAddon align="inline-end">
+                                                                <InputGroupButton
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="icon-xs"
+                                                                    onClick={() =>
+                                                                        remove(
+                                                                            index
+                                                                        )
+                                                                    }
+                                                                    aria-label={`Apagar aula ${index + 1}`}
+                                                                >
+                                                                    <XIcon />
+                                                                </InputGroupButton>
+                                                            </InputGroupAddon>
+                                                        )}
+                                                    </InputGroup>
+                                                    {fieldState.invalid && (
+                                                        <FieldError
+                                                            errors={[
+                                                                fieldState.error
+                                                            ]}
+                                                        />
                                                     )}
-                                                </InputGroup>
-                                                {fieldState.invalid && (
-                                                    <FieldError
-                                                        errors={[
-                                                            fieldState.error
-                                                        ]}
-                                                    />
-                                                )}
-                                            </FieldContent>
-                                        </Field>
+                                                </FieldContent>
+                                            </Field>
+                                        </ScrollArea>
                                     )}
                                 />
                             ))}

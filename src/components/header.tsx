@@ -3,14 +3,26 @@ import { Button } from './ui/button'
 
 export function Header() {
     return (
-        <header className="w-full p-4 bg-gray-800 text-white text-center flex justify-center items-center gap-4">
-            <h1 className="text-2xl font-bold">Gerador de listas</h1>
-            <Button className="mt-2 ml-auto" asChild>
-                <a href="/register">Gerenciar Listas</a>
+        <header className="p-6 bg-amber-400 flex justify-center items-center w-full gap-4">
+            <Button size="lg" className="mr-auto text-3xl" asChild>
+                <a href="/" className="text-blue-950 py-5">
+                    Gerenciar Listas
+                </a>
             </Button>
-            <Button className="mt-2">
-                <a href="/lista" className="flex items-center gap-2">
-                    Cadastrar <Plus />
+            <Button asChild>
+                <a href="/new-student" className="flex items-center gap-2">
+                    Novo Aluno
+                    <Plus />
+                </a>
+            </Button>
+            <Button asChild>
+                <a href="/new-employer" className="flex items-center gap-2">
+                    Nova Empresa <Plus />
+                </a>
+            </Button>
+            <Button asChild>
+                <a href="/new-instructor" className="flex items-center gap-2">
+                    Novo Instrutor <Plus />
                 </a>
             </Button>
         </header>

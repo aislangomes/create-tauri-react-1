@@ -1,18 +1,32 @@
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import Layout from './layout'
 
 const createAppRouter = () =>
     createBrowserRouter([
         {
-            path: '/',
-            lazy: () => import('@/app/routes/home')
-        },
-        {
-            path: '/register',
-            lazy: () => import('@/app/routes/register')
-        },
-        {
-            path: '*',
-            lazy: () => import('@/app/routes/not-found')
+            element: <Layout />,
+            children: [
+                {
+                    path: '/',
+                    lazy: () => import('@/app/routes/home')
+                },
+                {
+                    path: '/new-student',
+                    lazy: () => import('@/app/routes/page-student-register')
+                },
+                {
+                    path: '/new-employer',
+                    lazy: () => import('@/app/routes/page-employer-register')
+                },
+                {
+                    path: '/new-instructor',
+                    lazy: () => import('@/app/routes/page-instructor-register')
+                },
+                {
+                    path: '*',
+                    lazy: () => import('@/app/routes/not-found')
+                }
+            ]
         }
     ])
 
