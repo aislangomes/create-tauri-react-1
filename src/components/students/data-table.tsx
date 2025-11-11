@@ -78,12 +78,12 @@ export function DataTable<TData, TValue>({
                             placeholder="Aluno"
                             value={
                                 (table
-                                    .getColumn('student')
+                                    .getColumn('fullname')
                                     ?.getFilterValue() as string) ?? ''
                             }
                             onChange={(event) =>
                                 table
-                                    .getColumn('student')
+                                    .getColumn('fullname')
                                     ?.setFilterValue(event.target.value)
                             }
                             className="flex w-full"

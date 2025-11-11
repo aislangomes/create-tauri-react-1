@@ -12,16 +12,17 @@ import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
 import { Checkbox } from '../ui/checkbox'
 
 export type Students = {
-    id: string
-    student: string
-    employer: string
+    id: string | number
+    fullname: string
+    employer: '' | 'empresa1' | 'empresa2'
     class:
+        | ''
         | 'Segunda-Feira'
         | 'Terça-Feira'
         | 'Quarta-Feira'
         | 'Quinta-Feira'
         | 'Sexta-Feira'
-    shift: 'Manhã' | 'Tarde'
+    shift: '' | 'Manhã' | 'Tarde'
     arch: string
 }
 
@@ -44,12 +45,12 @@ export const columns: ColumnDef<Students>[] = [
             <Checkbox
                 checked={row.getIsSelected()}
                 onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label={`Selecionar aluno ${row.original.student}`}
+                aria-label={`Selecionar aluno ${row.original.fullname}`}
             />
         )
     },
     {
-        accessorKey: 'student',
+        accessorKey: 'fullname',
         header: ({ column }) => {
             return (
                 <Button

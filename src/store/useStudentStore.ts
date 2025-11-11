@@ -1,26 +1,29 @@
-// import { studentSchema } from "@/components/register/students-register"
-// import z from "zod"
-// import { create } from "zustand"
+import { Student } from '@/schemas/student.schema'
+import { create } from 'zustand'
 
-// type Student = <z.infer<typeof studentSchema>>
-// type StudentStore = {
-//   students: Student[],
-// }
+type StudentStore = {
+    students: Student[]
+    addStudent: (newStudent: Student) => void
+    removeStudent: (student: Student) => void
+    updateStudent: (updateStudent: Student) => void
+}
 
-// type Task = {
-//   id: string,
-//   text: string
-// }
-
-// type TaskStore = {
-//   tasks : Task[]
-// }
-
-// export const useStudentStore = create<StudentStore>()((set) => ({
-//   students: [],
-//   addStudent: (newStudent:studentType) => {
-//     set((state) => ({
-//       students: [...state.students, newStudent]
-//     }))
-//   }
-// }))
+export const useStudentStore = create<StudentStore>((set) => ({
+    students: [],
+    addStudent: (newStudent) =>
+        set((state) => ({
+            students: [...state.students, newStudent]
+        })),
+    removeStudent: (student) =>
+        set((state) => ({
+            students: state.students.filter(
+                (removeStudent) => removeStudent.id !== student.id
+            )
+        })),
+    updateStudent: (updateStudent: Student) =>
+        set((state) => ({
+            students: state.students.map((student) =>
+                student.id === updateStudent.id ? updateStudent : student
+            )
+        }))
+}))
