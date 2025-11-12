@@ -1,0 +1,14 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "fullname": "Maria Silva",
+      "employer": "empresa1",
+      "class": "Segunda-Feira",
+      "shift": "Manhã",
+      "arch": "Tecnologia"
+    }
+  ],
+  "instructors": [],
+  "employers": []
+}

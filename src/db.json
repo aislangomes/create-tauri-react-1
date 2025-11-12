@@ -1,0 +1,25 @@
+{
+    "students": [
+        {
+            "id": "123",
+            "fullname": "aislan cesar alves gomes",
+            "sex": "masculino",
+            "class": "Segunda-Feira",
+            "shift": "Manhã",
+            "module": "Especifíco",
+            "workload": "180",
+            "phone": "15 12345 1234",
+            "arch": "Tecnologia",
+            "instructor": "Instrutor1",
+            "employer": "empresa1",
+            "email": "aislan@gmail.com",
+            "gurdiansContact": "12312312312",
+            "gurdianName": "aislan",
+            "enrollmentInitialDate": "2025-11-12T20:00:00.000Z",
+            "enrollmentEndDate": "2025-11-12T20:00:00.000Z",
+            "birthDate": "2025-11-12T20:00:00.000Z"
+        }
+    ],
+    "employer": [],
+    "instructors": []
+}

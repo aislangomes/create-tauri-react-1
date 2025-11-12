@@ -1,15 +1,16 @@
 'use client'
 
-import { useStudentStore } from '@/store/useStudentStore'
+import { useStudentStore } from '@/store/useStudentStore-plugin'
 import { Students, columns } from './columns'
 import { DataTable } from './data-table'
 import { useEffect, useState } from 'react'
 
 export default function StudentPage() {
     const { students } = useStudentStore()
+    console.log(students)
+
     const [data, setData] = useState<Students[]>([])
     useEffect(() => {
-        console.log(students)
         const mapped = students.map((student) => ({
             id: student.id,
             fullname: student.fullname,

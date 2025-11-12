@@ -23,7 +23,7 @@ import {
     SelectValue
 } from '../ui/select'
 import { studentSchema } from '@/schemas/student.schema'
-import { useStudentStore } from '@/store/useStudentStore'
+import { useStudentStore } from '@/store/useStudentStore-plugin'
 
 export function StudentForm() {
     const { addStudent } = useStudentStore()
@@ -54,7 +54,6 @@ export function StudentForm() {
         data.id = String(Math.floor(Math.random() * 100000 - 0) + 0)
         try {
             console.log('Form Data:', data)
-            toast.success('Aluno cadastrado com sucesso!')
             addStudent(data)
         } catch (error) {
             console.error('Error submitting form:', error)

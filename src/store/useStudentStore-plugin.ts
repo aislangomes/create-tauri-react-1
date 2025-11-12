@@ -1,5 +1,7 @@
-import { Student } from '@/schemas/student.schema'
 import { create } from 'zustand'
+import { open } from '@tauri-apps/plugin-shell'
+import { tauri } from '@tauri-store/zustand/dist/index.js'
+import { Student } from '@/schemas/student.schema'
 
 type StudentStore = {
     students: Student[]
@@ -27,3 +29,20 @@ export const useStudentStore = create<StudentStore>((set) => ({
             )
         }))
 }))
+
+export const tauriHandler = tauri('students', useStudentStore, {
+    autoStart: true,
+    saveStrategy: 'debounce',
+    saveInterval: 1000,
+    hooks: {
+        beforeBackendSync: (state) => {
+            console.log(state)
+            return state
+        }
+    }
+})
+
+export async function openStore() {
+    const path = await tauriHandler.getPath()
+    await open(path)
+}
