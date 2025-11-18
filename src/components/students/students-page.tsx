@@ -6,8 +6,7 @@ import { DataTable } from './data-table'
 import { useEffect, useState } from 'react'
 
 export default function StudentPage() {
-    const { students } = useStudentStore()
-    console.log(students)
+    const students = useStudentStore((state) => state.students)
 
     const [data, setData] = useState<Students[]>([])
     useEffect(() => {

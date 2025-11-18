@@ -24,9 +24,14 @@ import {
 } from '../ui/select'
 import { studentSchema } from '@/schemas/student.schema'
 import { useStudentStore } from '@/store/useStudentStore-plugin'
+import { useEffect, useState } from 'react'
+import { Employer } from '@/schemas/employer.schema'
+import { useEmployerStore } from '@/store/useEmployertStore-plugin'
 
 export function StudentForm() {
-    const { addStudent } = useStudentStore()
+    const employers = useEmployerStore((state) => state.employers)
+
+    const addStudent = useStudentStore((state) => state.addStudent)
     const form = useForm<z.infer<typeof studentSchema>>({
         resolver: zodResolver(studentSchema),
         defaultValues: {
@@ -57,7 +62,6 @@ export function StudentForm() {
             addStudent(data)
         } catch (error) {
             console.error('Error submitting form:', error)
-            toast.error('Erro ao cadastrar aluno. Tente novamente.')
         }
     }
 
@@ -223,16 +227,14 @@ export function StudentForm() {
                                                 <SelectValue placeholder="Empresa" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {studentSchema.shape.employer.options
-                                                    .slice(1)
-                                                    .map((option) => (
-                                                        <SelectItem
-                                                            key={option}
-                                                            value={option}
-                                                        >
-                                                            {option}
-                                                        </SelectItem>
-                                                    ))}
+                                                {employers.map((option) => (
+                                                    <SelectItem
+                                                        key={option.id}
+                                                        value={option.company}
+                                                    >
+                                                        {option.company}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
                                     </FormControl>
@@ -308,16 +310,9 @@ export function StudentForm() {
                                                     <SelectValue placeholder="Instrutor" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    {studentSchema.shape.instructor.options
-                                                        .slice(1)
-                                                        .map((option) => (
-                                                            <SelectItem
-                                                                key={option}
-                                                                value={option}
-                                                            >
-                                                                {option}
-                                                            </SelectItem>
-                                                        ))}
+                                                    <SelectItem value="instrutor1">
+                                                        instrutor1
+                                                    </SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
@@ -339,16 +334,9 @@ export function StudentForm() {
                                                     <SelectValue placeholder="Arco" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    {studentSchema.shape.arch.options
-                                                        .slice(1)
-                                                        .map((option) => (
-                                                            <SelectItem
-                                                                key={option}
-                                                                value={option}
-                                                            >
-                                                                {option}
-                                                            </SelectItem>
-                                                        ))}
+                                                    <SelectItem value="arco1">
+                                                        arco1
+                                                    </SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>

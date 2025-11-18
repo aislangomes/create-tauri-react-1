@@ -14,21 +14,11 @@ import {
     CardTitle
 } from '../ui/card'
 import { Button } from '../ui/button'
-
-const employerSchema = z.object({
-    id: z.number(),
-    company: z
-        .string()
-        .min(3, { message: 'O nome deve ter no mínimo 3 caracteres.' }),
-    email: z.email({ message: 'Insira um e-mail válido.' }).optional(),
-    phone: z
-        .string()
-        .min(10, { message: 'O telefone deve ter no mínimo 10 caracteres.' }),
-    address: z.string().optional(),
-    responsible: z.string().optional()
-})
+import { employerSchema } from '@/schemas/employer.schema'
+import { useEmployerStore } from '@/store/useEmployertStore-plugin'
 
 export function EmployerForm() {
+    const addEmployer = useEmployerStore((state) => state.addEmployer)
     const form = useForm<z.infer<typeof employerSchema>>({
         resolver: zodResolver(employerSchema),
         defaultValues: {
@@ -46,7 +36,7 @@ export function EmployerForm() {
 
         try {
             console.log('Form Data:', data)
-            toast.success('Empresa cadastrado com sucesso!')
+            addEmployer(data)
         } catch (error) {
             console.error('Error submitting form:', error)
             toast.error('Erro ao cadastrar Empresa. Tente novamente.')

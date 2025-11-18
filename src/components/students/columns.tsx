@@ -10,9 +10,11 @@ import {
 import { Button } from '../ui/button'
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
 import { Checkbox } from '../ui/checkbox'
+import { useStudentStore } from '@/store/useStudentStore-plugin'
+import { RowActions } from './options-cell'
 
 export type Students = {
-    id: string | number
+    id: string
     fullname: string
     employer: '' | 'empresa1' | 'empresa2'
     class:
@@ -83,33 +85,6 @@ export const columns: ColumnDef<Students>[] = [
     },
     {
         id: 'options',
-        cell: ({ row }) => {
-            const Students = row.original
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <Button variant="ghost" className="h8 w-8 p-0">
-                            <span className="sr-only">Opções</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Opções</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() =>
-                                navigator.clipboard.writeText(Students.id)
-                            }
-                        >
-                            Copiar ID
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Editar</DropdownMenuItem>
-                        <DropdownMenuItem className="text-red-600 hover:text-red-800 focus:text-red-800">
-                            Deletar
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )
-        }
+        cell: ({ row }) => <RowActions student={row.original} />
     }
 ]

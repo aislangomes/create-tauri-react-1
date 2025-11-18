@@ -16,8 +16,8 @@ export const studentSchema = z
             'Quinta-Feira',
             'Sexta-Feira'
         ]),
-        shift: z.enum(['', 'Manhã', 'Tarde']),
-        module: z.enum(['', 'Básico', 'Especifico']),
+        shift: z.enum(['', 'Manhã', 'Tarde', 'Noite']),
+        module: z.enum(['', 'Básico', 'Específico', 'Imersão']),
         workload: z.string(),
         gurdiansContact: z.string().optional(),
         gurdianName: z.string().optional(),
@@ -27,9 +27,9 @@ export const studentSchema = z
         phone: z.string().min(10, {
             message: 'O telefone deve ter no mínimo 10 caracteres.'
         }),
-        arch: z.enum(['', 'Administrativo', 'Tecnologia']),
-        instructor: z.enum(['', 'instrutor1', 'intrutor2']),
-        employer: z.enum(['', 'empresa1', 'empresa2'])
+        arch: z.string(),
+        instructor: z.string(),
+        employer: z.string()
     })
     .refine(
         (data) =>

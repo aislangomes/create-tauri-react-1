@@ -1,11 +1,13 @@
 {
-  "identifier": "migrated",
+  "identifier": "zustand",
   "description": "permissions that were migrated from v1",
   "local": true,
   "windows": [
-    "main"
+    "*"
   ],
   "permissions": [
+    "zustand:default",
+    "core:event:default",
     "core:default",
     "process:default",
     "shell:default",

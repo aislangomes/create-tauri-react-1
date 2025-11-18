@@ -6,7 +6,7 @@ import { Student } from '@/schemas/student.schema'
 type StudentStore = {
     students: Student[]
     addStudent: (newStudent: Student) => void
-    removeStudent: (student: Student) => void
+    removeStudent: (studentId: Student) => void
     updateStudent: (updateStudent: Student) => void
 }
 
@@ -16,10 +16,10 @@ export const useStudentStore = create<StudentStore>((set) => ({
         set((state) => ({
             students: [...state.students, newStudent]
         })),
-    removeStudent: (student: Student) =>
+    removeStudent: (studentId: Student) =>
         set((state) => ({
             students: state.students.filter(
-                (removeStudent) => removeStudent.id !== student.id
+                (removeStudent) => removeStudent.id !== studentId.id
             )
         })),
     updateStudent: (updateStudent: Student) =>
